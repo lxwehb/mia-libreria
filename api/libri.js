@@ -1,10 +1,10 @@
-// api/libri.js
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
-const BASE_ID = "patjeGY2SdgLA0sr2";  // ← SOSTITUISCI CON IL TUO
+const BASE_ID = "patjeGY2SdgLA0sr2";  // Il tuo ID base
 const TABLE_NAME = "Libri";
 
 export default async function handler(req, res) {
-const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
+  const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`; // 🔥 Qui corretto
+
   try {
     const response = await fetch(url, {
       headers: {
