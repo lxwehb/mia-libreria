@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>La Mia Libreria</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      background: #f9f9f9;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .libro {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .copertina {
+      width: 100px;
+      height: 140px;
+      object-fit: cover;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .info h3 {
+      margin: 0 0 8px 0;
+      color: #2d3748;
+    }
+    .info p {
+      margin: 5px 0;
+      color: #555;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #ff9900;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .btn:hover {
+      background: #e88a00;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 La Mia Libreria</h1>
+    <p>Scopri i libri in evidenza</p>
+  </header>
+
+  <main id="libri-container">
+    <p>Caricamento libri...</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 La Mia Libreria. Tutti i diritti riservati.</p>
+  </footer>
+
+  <script>
+    async function loadBooks() {
+      const container = document.getElementById("libri-container");
+      try {
+        const response = await fetch("/api/libri");
+        const libri = await response.json();
+
+        container.innerHTML = "";
+
+        if (libri.length === 0) {
+          container.innerHTML = "<p>Nessun libro disponibile.</p>";
+          return;
+        }
+
+        libri.forEach(libro => {
+          // Gestisci l'immagine
+          const imageUrl = libro.Copertina && libro.Copertina[0] 
+            ? libro.Copertina[0].url 
+            : "https://via.placeholder.com/100x140?text=No+Cover";
+
+          const html = `
+            <div class="libro">
+              <img src="${imageUrl}" alt="${libro.Titolo}" class="copertina">
+              <div class="info">
+                <h3>${libro.Titolo}</h3>
+                <p><strong>${libro.Autore}</strong></p>
+                <p>${libro.Descrizione || ''}</p>
+                <a href="${libro["Amazon Link"]}" target="_blank" class="btn">Compra su Amazon</a>
+              </div>
+            </div>
+          `;
+          container.innerHTML += html;
+        });
+      } catch (err) {
+        container.innerHTML = "<p>Errore nel caricamento dei libri.</p>";
+        console.error("Errore:", err);
+      }
+    }
+
+    loadBooks();
+  </script>
+</body>
+</html>
