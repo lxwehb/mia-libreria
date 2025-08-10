@@ -1,5 +1,5 @@
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
-const BASE_ID = "patjeGY2SdgLA0sr2";  // Il tuo ID base
+const BASE_ID = "appzKMcpJupcEcB9v";  // Il tuo ID base
 const TABLE_NAME = "Libri";
 
 export default async function handler(req, res) {
@@ -25,4 +25,5 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "Impossibile caricare i libri" });
   }
 }
+
 
