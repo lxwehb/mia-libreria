@@ -4,8 +4,7 @@ const BASE_ID = "patjeGY2SdgLA0sr2";  // ← SOSTITUISCI CON IL TUO
 const TABLE_NAME = "Libri";
 
 export default async function handler(req, res) {
-  const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
-
+const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
   try {
     const response = await fetch(url, {
       headers: {
@@ -26,3 +25,4 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "Impossibile caricare i libri" });
   }
 }
+
