@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
-  const BASE_ID = "appzKMcpJupcEcB9v";        // Il tuo Base ID
-  const TABLE_NAME = "Table%201";             // Nome della tabella con spazio
+  const BASE_ID = "appzKMcpJupcEcB9v";
+  const TABLE_NAME = "Table%201";
 
   const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
 
@@ -30,4 +30,3 @@ export default async function handler(req, res) {
     });
   }
 }
-
